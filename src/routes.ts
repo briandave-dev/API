@@ -8,6 +8,6 @@ router.post("/signup", checkApiKey, signup);
 router.post("/login", checkApiKey, login);
 router.get("/checkauth", checkApiKey, verifyJwt, checkAuth);
 router.get("/get-users", checkApiKey, verifyJwt, getUsers)
-router.get("/get-user", checkApiKey, getUserData)
+router.get("/get-user", checkApiKey, verifyJwt, getUserData)
 
 export default router;

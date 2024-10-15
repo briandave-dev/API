@@ -69,6 +69,7 @@ export const signup = (req: Request, res: Response): void => {
 
 export const login = (req: Request, res: Response): void => {
   const sql = "SELECT * FROM users WHERE email = ?";
+  
   db.query(sql, [req.body.email], (err: any, data: any) => {
     if (err) {
       return res.status(500).json(err);
@@ -80,7 +81,15 @@ export const login = (req: Request, res: Response): void => {
         }
         if (response) {
           const id = data[0].id;
-          const token = jwt.sign({ id }, process.env.JWT_SECRET as string, { expiresIn: 300 });
+          const token = jwt.sign({ id }, process.env.JWT_SECRET as string, { expiresIn: '5m' });
+          
+          // Set cookie without secure flag for development
+          res.cookie('token', token, {
+            httpOnly: true, // Not accessible via JavaScript
+            sameSite: 'lax', // Adjust for development
+            maxAge: 5 * 60 * 1000 // Cookie expiry time
+          });
+          
           return res.json({ Login: true, token, userData: data[0] });
         }
         return res.json({ Login: false });
@@ -90,6 +99,31 @@ export const login = (req: Request, res: Response): void => {
     }
   });
 };
+
+// export const login = (req: Request, res: Response): void => {
+//   const sql = "SELECT * FROM users WHERE email = ?";
+//   db.query(sql, [req.body.email], (err: any, data: any) => {
+//     if (err) {
+//       return res.status(500).json(err);
+//     }
+//     if (data.length > 0) {
+//       bcrypt.compare(req.body.password.toString(), data[0].password, (err: any, response: boolean) => {
+//         if (err) {
+//           return res.status(500).json(err);
+//         }
+//         if (response) {
+//           const id = data[0].id;
+//           const token = jwt.sign({ id }, process.env.JWT_SECRET as string, { expiresIn: 300 });
+//           res.cookie('token', token);
+//           return res.json({ Login: true, token, userData: data[0] });
+//         }
+//         return res.json({ Login: false });
+//       });
+//     } else {
+//       return res.json("Failed");
+//     }
+//   });
+// };
 
 export const checkAuth = (req: Request, res: Response) => {
   return res.json("Authenticated");
