@@ -67,6 +67,15 @@ export const signup = (req: Request, res: Response): void => {
   });
 };
 
+export const logout = (req: Request, res: Response): Response => {
+  res.clearCookie('token', { httpOnly: true, sameSite: 'lax' }); // Adjust attributes as needed
+
+  // Optionally clear additional cookies
+  // res.clearCookie('anotherCookie');
+
+  return res.status(200).json({ message: 'Logged out successfully' });
+};
+
 export const login = (req: Request, res: Response): void => {
   const sql = "SELECT * FROM users WHERE email = ?";
   
@@ -81,13 +90,13 @@ export const login = (req: Request, res: Response): void => {
         }
         if (response) {
           const id = data[0].id;
-          const token = jwt.sign({ id }, process.env.JWT_SECRET as string, { expiresIn: '5m' });
+          const token = jwt.sign({ id }, process.env.JWT_SECRET as string, { expiresIn: '1y' });
           
           // Set cookie without secure flag for development
           res.cookie('token', token, {
             httpOnly: true, // Not accessible via JavaScript
             sameSite: 'lax', // Adjust for development
-            maxAge: 5 * 60 * 1000 // Cookie expiry time
+            maxAge: 365 * 24 * 60 * 60 * 1000 // One year
           });
           
           return res.json({ Login: true, token, userData: data[0] });

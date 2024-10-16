@@ -22,16 +22,17 @@ export const checkApiKey = (req: Request, res: Response, next: NextFunction): vo
 };
 
 export const verifyJwt = (req: Request, res: Response, next: NextFunction) => {
-  // const token = req.headers["access-token"] as string; // Cast to string
-  const token =  req.cookies.token as string
+  const token = req.headers["access-token"] as string; // Cast to string
+  // const token =  req.cookies.token as string
   if (!token) {
-    return res.status(401).json("We need token please provide it for next time");
+    return res.status(401).json("Your session token has been deleted. Please login again.");
   } else {
     jwt.verify(token, process.env.JWT_SECRET as string, (err: any, decoded: any) => {
       if (err) {
-        return res.status(403).json("Not authenticated");
+        return res.status(401).json("Your session token has expired. Please login again.");
       } else {
         (req as any).userId = (decoded as { id: number }).id; // Cast req to any to allow adding userId
+        // res.status(200).json({ userId: `${(req as any).userId }`})
         next();
       }
     });
