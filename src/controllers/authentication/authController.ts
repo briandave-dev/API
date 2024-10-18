@@ -101,7 +101,7 @@ export const login = (req: Request, res: Response): void => {
             maxAge: 365 * 24 * 60 * 60 * 1000 // One year
           });
 
-          res.cookie('userId', data[0].id, {
+          res.cookie('userId', id, {
             httpOnly: true, // Not accessible via JavaScript
             sameSite: 'lax', // Adjust for development
             maxAge: 365 * 24 * 60 * 60 * 1000 // One year

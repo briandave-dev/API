@@ -11,7 +11,7 @@ app.use(cookieParser());
 
 // app.use(cors());
 app.use(cors({
-  origin: 'http://localhost:3000', // Your Next.js app URL
+  origin: process.env.ORIGIN, // Your Next.js app URL
   credentials: true // Allow cookies to be sent
 }));
 
