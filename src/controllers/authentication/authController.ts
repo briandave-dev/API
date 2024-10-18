@@ -69,6 +69,8 @@ export const signup = (req: Request, res: Response): void => {
 
 export const logout = (req: Request, res: Response): Response => {
   res.clearCookie('token', { httpOnly: true, sameSite: 'lax' }); // Adjust attributes as needed
+  res.clearCookie('userData', { httpOnly: true, sameSite: 'lax' }); // Adjust attributes as needed
+  res.clearCookie('userId', { httpOnly: true, sameSite: 'lax' }); // Adjust attributes as needed
 
   // Optionally clear additional cookies
   // res.clearCookie('anotherCookie');
@@ -94,6 +96,12 @@ export const login = (req: Request, res: Response): void => {
           
           // Set cookie without secure flag for development
           res.cookie('token', token, {
+            httpOnly: true, // Not accessible via JavaScript
+            sameSite: 'lax', // Adjust for development
+            maxAge: 365 * 24 * 60 * 60 * 1000 // One year
+          });
+
+          res.cookie('userId', data[0].id, {
             httpOnly: true, // Not accessible via JavaScript
             sameSite: 'lax', // Adjust for development
             maxAge: 365 * 24 * 60 * 60 * 1000 // One year

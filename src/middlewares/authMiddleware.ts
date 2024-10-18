@@ -22,8 +22,8 @@ export const checkApiKey = (req: Request, res: Response, next: NextFunction): vo
 };
 
 export const verifyJwt = (req: Request, res: Response, next: NextFunction) => {
-  const token = req.headers["access-token"] as string; // Cast to string
-  // const token =  req.cookies.token as string
+  // const token = req.headers["access-token"] as string; // Cast to string
+  const token =  req.cookies.token as string
   if (!token) {
     return res.status(401).json("Your session token has been deleted. Please login again.");
   } else {
