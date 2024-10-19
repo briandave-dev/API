@@ -11,7 +11,8 @@
     "dotenv": "^16.4.5",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
-    "mysql": "^2.18.1"
+    "mysql": "^2.18.1",
+    "mysql2": "^3.11.3"
   },
   "scripts": {
     "dev": "nodemon --config nodemon.json src/index.ts"
