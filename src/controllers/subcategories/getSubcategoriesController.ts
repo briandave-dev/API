@@ -11,7 +11,7 @@ interface SubcategoryResponse {
 
 export const getSubcategories = (req: Request, res: Response): any => {
   const query = `SELECT subcategories.id, subcategories.name AS name, subcategories.discount, categories.name 
-  AS category_name from subcategories JOIN categories ON subcategories.category_id = categories.id`;
+  AS category_name, categories.id as category_id from subcategories JOIN categories ON subcategories.category_id = categories.id`;
 
   db.query(query, (err: any, results: SubcategoryResponse[]) => {
     if (err) {

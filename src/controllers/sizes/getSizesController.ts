@@ -10,7 +10,7 @@ interface SizeResponse {
 
 export const getSizes = (req: Request, res: Response): any => {
   const query = `SELECT sizes.id, sizes.name AS name, categories.name 
-  AS category_name from sizes JOIN categories ON sizes.category_id = categories.id`;
+  AS category_name, categories.id as category_id from sizes JOIN categories ON sizes.category_id = categories.id`;
 
   db.query(query, (err: any, results: SizeResponse[]) => {
     if (err) {

@@ -11,6 +11,8 @@ import { getSubcategories } from "./controllers/subcategories/getSubcategoriesCo
 import { addSubcategory } from "./controllers/subcategories/addSubcategoryController";
 import { getSizes } from "./controllers/sizes/getSizesController";
 import { addSize } from "./controllers/sizes/addSizeController";
+import { getProduct } from "./controllers/products/getSingleProductController";
+import { editProduct } from "./controllers/products/editProductController";
 
 const router = express.Router();
 
@@ -32,5 +34,10 @@ router.get("/get-hashtags", checkApiKey, verifyJwt, getHashtags);
 router.get("/get-categories", checkApiKey, verifyJwt, getCategories);
 router.get("/get-subcategories", checkApiKey, verifyJwt, getSubcategories);
 router.get("/get-sizes", checkApiKey, verifyJwt, getSizes);
+
+router.get("/get-product/:id", checkApiKey, getProduct);
+
+router.post("/edit-product/:id", checkApiKey, editProduct);
+
 
 export default router;
