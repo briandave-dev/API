@@ -15,6 +15,8 @@ import { getProduct } from "./controllers/products/getSingleProductController";
 import { editProduct } from "./controllers/products/editProductController";
 import { getCategory } from "./controllers/categories/getSingleCategoryController";
 import { editCategory } from "./controllers/categories/editCategoryController";
+import { getHashtag } from "./controllers/hashtags/getSingleHashtag";
+import { editHashtag } from "./controllers/hashtags/editHashtagController";
 
 const router = express.Router();
 
@@ -25,11 +27,13 @@ router.get("/checkauth", checkApiKey, verifyJwt, checkAuth);
 router.get("/get-users", checkApiKey, verifyJwt, getUsers);
 router.get("/get-user", checkApiKey, verifyJwt, getUserData);
 
+
 router.post("/add-product", checkApiKey, verifyJwt, addProduct);
 router.post("/add-hashtag", checkApiKey, verifyJwt, addHashtag);
 router.post("/add-category", checkApiKey, verifyJwt, addCategory);
 router.post("/add-subcategory", checkApiKey, verifyJwt, addSubcategory);
 router.post("/add-size", checkApiKey, verifyJwt, addSize);
+
 
 router.get("/get-products", checkApiKey, verifyJwt, getProducts);
 router.get("/get-hashtags", checkApiKey, verifyJwt, getHashtags);
@@ -37,11 +41,15 @@ router.get("/get-categories", checkApiKey, verifyJwt, getCategories);
 router.get("/get-subcategories", checkApiKey, verifyJwt, getSubcategories);
 router.get("/get-sizes", checkApiKey, verifyJwt, getSizes);
 
+
 router.get("/get-product/:id", checkApiKey, verifyJwt, getProduct);
 router.get("/get-category/:id", checkApiKey, verifyJwt, getCategory);
+router.get("/get-hashtag/:id", checkApiKey, verifyJwt, getHashtag);
+
 
 router.post("/edit-product/:id", checkApiKey, verifyJwt, editProduct);
-router.post("/edit-category/:id", checkApiKey, verifyJwt,  editCategory);
+router.post("/edit-category/:id", checkApiKey, verifyJwt, editCategory);
+router.post("/edit-hashtag/:id", checkApiKey, verifyJwt, editHashtag);
 
 
 export default router;
