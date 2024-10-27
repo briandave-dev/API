@@ -21,6 +21,7 @@ export const getProducts = (req: Request, res: Response): any => {
       p.title,
       p.price,
       p.discount,
+      p.main_image,
       p.is_archived,
       p.created_at,
       c.name AS category_name,

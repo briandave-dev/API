@@ -3,7 +3,7 @@ import { Request, Response } from "express";
 
 export const editCategory = (req: Request, res: Response) => {
     const categoryId = Number(req.params.id);
-    const { name, discount } = req.body;
+    const { name, discount, url } = req.body;
 
     if (!name || !discount) {
         return res.status(500).json({ message: "Parameter lacking in the body" });
@@ -13,8 +13,8 @@ export const editCategory = (req: Request, res: Response) => {
         return res.status(500).json({ message: "No category id provided" });
     }
 
-    const query = 'UPDATE categories SET name = ?, discount = ? WHERE categories.id = ?';
-    db.query(query, [name, Number(discount), categoryId], (err: any) => {
+    const query = 'UPDATE categories SET name = ?, discount = ?, url = ? WHERE categories.id = ?';
+    db.query(query, [name, Number(discount), url, categoryId], (err: any) => {
         if(err) {
             return res.status(500).json({ message: `Error updating category ${err}` })
         }

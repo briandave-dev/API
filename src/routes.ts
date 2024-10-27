@@ -35,7 +35,7 @@ router.post("/add-subcategory", checkApiKey, verifyJwt, addSubcategory);
 router.post("/add-size", checkApiKey, verifyJwt, addSize);
 
 
-router.get("/get-products", checkApiKey, verifyJwt, getProducts);
+router.get("/get-products", checkApiKey, getProducts);
 router.get("/get-hashtags", checkApiKey, verifyJwt, getHashtags);
 router.get("/get-categories", checkApiKey, verifyJwt, getCategories);
 router.get("/get-subcategories", checkApiKey, verifyJwt, getSubcategories);
