@@ -17,6 +17,11 @@ import { getCategory } from "./controllers/categories/getSingleCategoryControlle
 import { editCategory } from "./controllers/categories/editCategoryController";
 import { getHashtag } from "./controllers/hashtags/getSingleHashtag";
 import { editHashtag } from "./controllers/hashtags/editHashtagController";
+import { getBillboards } from "./controllers/billboards/getBillboardsController";
+import { getClientProducts } from "./controllers/products/getClientProductsController";
+import { addBillboard } from "./controllers/billboards/addBillboardController";
+import { editBillboard } from "./controllers/billboards/editBillboardController";
+import { getBillboard } from "./controllers/billboards/getSingleBillboardController";
 
 const router = express.Router();
 
@@ -33,23 +38,27 @@ router.post("/add-hashtag", checkApiKey, verifyJwt, addHashtag);
 router.post("/add-category", checkApiKey, verifyJwt, addCategory);
 router.post("/add-subcategory", checkApiKey, verifyJwt, addSubcategory);
 router.post("/add-size", checkApiKey, verifyJwt, addSize);
-
+router.post("/add-billboard", checkApiKey, verifyJwt, addBillboard);
 
 router.get("/get-products", checkApiKey, getProducts);
-router.get("/get-hashtags", checkApiKey, verifyJwt, getHashtags);
-router.get("/get-categories", checkApiKey, verifyJwt, getCategories);
-router.get("/get-subcategories", checkApiKey, verifyJwt, getSubcategories);
-router.get("/get-sizes", checkApiKey, verifyJwt, getSizes);
+router.get("/get-client-products", checkApiKey, getClientProducts);
 
+router.get("/get-hashtags", checkApiKey, getHashtags);
+router.get("/get-categories", checkApiKey, getCategories);
+router.get("/get-subcategories", checkApiKey, getSubcategories);
+router.get("/get-sizes", checkApiKey, getSizes);
+router.get("/get-billboards", checkApiKey, getBillboards);
 
-router.get("/get-product/:id", checkApiKey, verifyJwt, getProduct);
-router.get("/get-category/:id", checkApiKey, verifyJwt, getCategory);
-router.get("/get-hashtag/:id", checkApiKey, verifyJwt, getHashtag);
+router.get("/get-product/:id", checkApiKey, getProduct);
+router.get("/get-category/:id", checkApiKey, getCategory);
+router.get("/get-hashtag/:id", checkApiKey, getHashtag);
+router.get("/get-billboard/:id", checkApiKey, getBillboard);
 
 
 router.post("/edit-product/:id", checkApiKey, verifyJwt, editProduct);
 router.post("/edit-category/:id", checkApiKey, verifyJwt, editCategory);
 router.post("/edit-hashtag/:id", checkApiKey, verifyJwt, editHashtag);
+router.post("/edit-billboard/:id", checkApiKey, verifyJwt, editBillboard);
 
 
 export default router;
